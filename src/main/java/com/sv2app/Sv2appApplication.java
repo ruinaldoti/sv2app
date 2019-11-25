@@ -27,7 +27,7 @@ public class Sv2appApplication implements CommandLineRunner {
 
 	@Override
 	public void run(String... args) throws Exception {
-		
+		/*
 		Categoria cat1 = new Categoria(null, "Janela2");
 		Categoria cat2 = new Categoria(null, "Porta3");
 		
@@ -44,7 +44,7 @@ public class Sv2appApplication implements CommandLineRunner {
 		
 		categoriaRepository.saveAll(Arrays.asList(cat1, cat2));
 		produtoRepository.saveAll(Arrays.asList(p1,p2,p3));
-		
+		*/
 		
 		
 	}
