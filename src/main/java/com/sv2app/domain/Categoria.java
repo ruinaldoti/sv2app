@@ -26,6 +26,9 @@ public class Categoria implements Serializable {
 		this.nome = nome;
 	}
 
+	
+	
+
 	public Integer getId() {
 		return id;
 	}
@@ -66,6 +69,9 @@ public class Categoria implements Serializable {
 			return false;
 		return true;
 	}
+
+	
+
 	
 	
 	
