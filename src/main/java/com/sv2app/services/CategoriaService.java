@@ -11,6 +11,7 @@ import org.springframework.data.domain.Sort.Direction;
 import org.springframework.stereotype.Service;
 
 import com.sv2app.domain.Categoria;
+import com.sv2app.dto.CategoriaDTO;
 import com.sv2app.repositories.CategoriaRepository;
 
 import com.sv2app.services.exceptions.DataIntegrityException;
@@ -56,6 +57,10 @@ public class CategoriaService {
 	public Page<Categoria> findPage(Integer page, Integer linesPerPage, String orderBy, String direction){
 		PageRequest pageRequest = PageRequest.of(page, linesPerPage, Direction.valueOf(direction), orderBy);
 		return repo.findAll(pageRequest);
+	}
+	
+	public Categoria fromDTO(CategoriaDTO objDto) {
+		return new Categoria (objDto.getId(), objDto.getNome());
 	}
 	
 	
