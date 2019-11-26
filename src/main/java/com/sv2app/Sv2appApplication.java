@@ -9,10 +9,15 @@ import org.springframework.boot.autoconfigure.SpringBootApplication;
 
 import com.sv2app.domain.Categoria;
 import com.sv2app.domain.Cidade;
+import com.sv2app.domain.Cliente;
+import com.sv2app.domain.Endereco;
 import com.sv2app.domain.Estado;
 import com.sv2app.domain.Produto;
+import com.sv2app.domain.enums.TipoCliente;
 import com.sv2app.repositories.CategoriaRepository;
 import com.sv2app.repositories.CidadeRepository;
+import com.sv2app.repositories.ClienteRepository;
+import com.sv2app.repositories.EnderecoRepository;
 import com.sv2app.repositories.EstadoRepository;
 import com.sv2app.repositories.ProdutoRepository;
 
@@ -30,6 +35,12 @@ public class Sv2appApplication implements CommandLineRunner {
 	
 	@Autowired
 	private EstadoRepository estadoRepository;
+	
+	@Autowired
+	private ClienteRepository clienteRepository;
+	
+	@Autowired
+	private EnderecoRepository enderecoRepository;
 	
 	public static void main(String[] args) {
 		SpringApplication.run(Sv2appApplication.class, args);
@@ -54,21 +65,32 @@ public class Sv2appApplication implements CommandLineRunner {
 		
 		categoriaRepository.saveAll(Arrays.asList(cat1, cat2));
 		produtoRepository.saveAll(Arrays.asList(p1,p2,p3));
+		
 		*/
+		Estado est1 = new Estado(null, "Piaui");
+		Estado est2 = new Estado(null, "Maranhão");
 		
-		Estado est1 = new Estado(null, "Mina Gerais");
-		Estado est2 = new Estado(null, "Ceara");
+		Cidade cida1 = new Cidade(null, "São Luiz", est2);
+		Cidade cida2 = new Cidade(null, "Terezina", est1);
 		
-		Cidade cida1 = new Cidade(null, "Fortaleza", est2);
-		Cidade cida2 = new Cidade(null, "Sobral", est2);
-		Cidade cida3 = new Cidade(null, "Ocara", est2);
-		Cidade cida4 = new Cidade(null, "Uberlandia", est1);
 		
-		est1.getCidades().addAll(Arrays.asList(cida4));	
-		est2.getCidades().addAll(Arrays.asList(cida1, cida2, cida3));
+		est1.getCidades().addAll(Arrays.asList(cida2));	
+		est2.getCidades().addAll(Arrays.asList(cida1));
 		
 		estadoRepository.saveAll(Arrays.asList(est1, est2));
-		cidadeRepository.saveAll(Arrays.asList(cida1, cida2, cida3, cida4));
+		cidadeRepository.saveAll(Arrays.asList(cida1, cida2));
+		
+		
+		Cliente cli1 = new Cliente(null,"Ruinaldo Lopes", "ruinaldo.ti@gmail.com", "654654123164", TipoCliente.PESSOAFISICAS);
+		cli1.getTelefones().addAll(Arrays.asList("998498489", "56456454456"));
+		
+		Endereco e1 = new Endereco(null, "Rua Primeiro de abril", "333", "Apto 32121", "Jardim", "32121561", cli1, cida2);
+		Endereco e2 = new Endereco(null, "Rua Teste Teste", "333", "Apto 351", "Jardim", "32121561", cli1, cida1);
+		
+		cli1.getEnderecos().addAll(Arrays.asList(e1, e2));
+		
+		clienteRepository.saveAll(Arrays.asList(cli1));
+		enderecoRepository.saveAll(Arrays.asList(e1,e2));
 		
 		
 	}
