@@ -4,6 +4,7 @@ import java.net.URI;
 import java.util.List;
 import java.util.stream.Collectors;
 
+import javax.transaction.Transactional;
 import javax.validation.Valid;
 
 import org.springframework.beans.factory.annotation.Autowired;
@@ -19,6 +20,7 @@ import org.springframework.web.servlet.support.ServletUriComponentsBuilder;
 
 import com.sv2app.domain.Cliente;
 import com.sv2app.dto.ClienteDTO;
+import com.sv2app.dto.ClienteNewDTO;
 import com.sv2app.services.ClienteService;
 
 @RestController
@@ -35,6 +37,14 @@ public class ClienteResource {
 
 	}
 	
+	@Transactional
+	@RequestMapping(method=RequestMethod.POST)
+	public ResponseEntity<Void> insert(@Valid @RequestBody ClienteNewDTO objDto){
+		Cliente obj = service.fromDTO(objDto);
+		obj = service.insert(obj);
+		URI uri= ServletUriComponentsBuilder.fromCurrentRequest().path("/{id}").buildAndExpand(obj.getId()).toUri();
+		return ResponseEntity.created(uri).build();
+	}
 	
 	
 	@RequestMapping(value="/{id}", method=RequestMethod.PUT)
