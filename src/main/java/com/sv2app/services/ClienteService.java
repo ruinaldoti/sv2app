@@ -11,7 +11,6 @@ import org.springframework.data.domain.Sort.Direction;
 import org.springframework.stereotype.Service;
 
 import com.sv2app.domain.Cliente;
-import com.sv2app.domain.Cliente;
 import com.sv2app.dto.ClienteDTO;
 import com.sv2app.repositories.ClienteRepository;
 import com.sv2app.services.exceptions.DataIntegrityException;

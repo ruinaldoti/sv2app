@@ -13,7 +13,6 @@ import org.springframework.stereotype.Service;
 import com.sv2app.domain.Categoria;
 import com.sv2app.dto.CategoriaDTO;
 import com.sv2app.repositories.CategoriaRepository;
-
 import com.sv2app.services.exceptions.DataIntegrityException;
 import com.sv2app.services.exceptions.ObjectNotFoundException;
 
@@ -36,7 +35,8 @@ public class CategoriaService {
 	}
 
 	public Categoria update(Categoria obj) {
-		find(obj.getId());
+		Categoria newObj = find(obj.getId());
+		updateData(newObj, obj);
 		return repo.save(obj);
 	}
 
@@ -61,6 +61,11 @@ public class CategoriaService {
 	
 	public Categoria fromDTO(CategoriaDTO objDto) {
 		return new Categoria (objDto.getId(), objDto.getNome());
+	}
+	
+	private void updateData(Categoria newObj, Categoria obj) {
+		newObj.setNome(obj.getNome());
+		
 	}
 	
 	
